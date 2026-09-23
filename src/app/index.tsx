@@ -2,13 +2,16 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { stats, insightData } from "@/constants/dashboard";
+import { useTheme } from "@/context/ThemeContext";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import StatCard from "@/components/dashboard/StatCard";
 import InsightCard from "@/components/dashboard/InsightCard";
 
 export default function index() {
+  const { theme } = useTheme();
+
   return (
-    <SafeAreaView style={styles.screen}>
+    <SafeAreaView style={[styles.screen, { backgroundColor: theme.bg }]}>
       <ScrollView contentContainerStyle={styles.content}>
         {/* Header Section */}
         <DashboardHeader
@@ -36,7 +39,6 @@ export default function index() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#f4f7fb",
   },
   content: {
     paddingHorizontal: 16,

@@ -1,17 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
 import type { InsightCardProps } from "./types/InsightCardProps";
 import { badgeColors } from "@/constants/dashboard";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function InsightCard({ insight }: InsightCardProps) {
+  const { theme } = useTheme();
   const badge = badgeColors[insight.badge] ?? { bg: "#e5e7eb", text: "#374151" };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.card }]}>
       {/* Header */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.title}>{insight.title}</Text>
-          <Text style={styles.subtitle}>{insight.subtitle}</Text>
+          <Text style={[styles.title, { color: theme.accent }]}>{insight.title}</Text>
+          <Text style={[styles.subtitle, { color: theme.text }]}>{insight.subtitle}</Text>
         </View>
         <View style={[styles.badge, { backgroundColor: badge.bg }]}>
           <Text style={[styles.badgeText, { color: badge.text }]}>
@@ -21,17 +23,22 @@ export default function InsightCard({ insight }: InsightCardProps) {
       </View>
 
       {/* Content */}
-      <Text style={styles.content}>{insight.content}</Text>
+      <Text style={[styles.content, { color: theme.subtext }]}>{insight.content}</Text>
 
       {/* Progress bar */}
-      <View style={styles.progressTrack}>
-        <View style={[styles.progressFill, { width: `${insight.progressValue}%` }]} />
+      <View style={[styles.progressTrack, { backgroundColor: theme.progressTrack }]}>
+        <View
+          style={[
+            styles.progressFill,
+            { width: `${insight.progressValue}%`, backgroundColor: theme.progressFill },
+          ]}
+        />
       </View>
 
       {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerLabel}>{insight.progressText}</Text>
-        <Text style={styles.footerValue}>{insight.progressValue}%</Text>
+        <Text style={[styles.footerLabel, { color: theme.text }]}>{insight.progressText}</Text>
+        <Text style={[styles.footerValue, { color: theme.accent }]}>{insight.progressValue}%</Text>
       </View>
     </View>
   );
@@ -39,7 +46,6 @@ export default function InsightCard({ insight }: InsightCardProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     padding: 16,
     borderRadius: 10,
     shadowColor: "#000",
@@ -57,7 +63,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 13,
     fontWeight: "bold",
-    color: "#2563eb",
   },
   subtitle: {
     fontSize: 24,
@@ -75,7 +80,6 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 13,
-    color: "#64748b",
     marginTop: 8,
     fontWeight: "500",
   },
@@ -83,13 +87,11 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     height: 12,
     marginTop: 18,
-    backgroundColor: "#e5e7eb",
     overflow: "hidden",
   },
   progressFill: {
     height: "100%",
     borderRadius: 99,
-    backgroundColor: "#2563eb",
   },
   footer: {
     flexDirection: "row",
@@ -103,6 +105,5 @@ const styles = StyleSheet.create({
   footerValue: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#2563eb",
   },
 });

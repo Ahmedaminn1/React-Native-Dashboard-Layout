@@ -3,4 +3,6 @@ export interface DashboardHeaderProps {
   title?: string;
   /** Single character shown in the avatar circle */
   avatarChar?: string;
+  isDark?: boolean;
+  onToggleTheme?: () => void;
 }
