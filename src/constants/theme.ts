@@ -63,3 +63,31 @@ export const Spacing = {
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;
+
+// ─── Dashboard theme tokens ───────────────────────────────────────────────────
+
+export const lightTheme = {
+  bg: "#f4f7fb",
+  card: "#ffffff",
+  text: "#111827",
+  subtext: "#64748b",
+  avatarBg: "#0f172a",
+  avatarText: "#ffffff",
+  progressTrack: "#e5e7eb",
+  progressFill: "#2563eb",
+  accent: "#2563eb",
+};
+
+export const darkTheme = {
+  bg: "#0f172a",
+  card: "#1e293b",
+  text: "#f1f5f9",
+  subtext: "#94a3b8",
+  avatarBg: "#334155",
+  avatarText: "#f1f5f9",
+  progressTrack: "#334155",
+  progressFill: "#3b82f6",
+  accent: "#60a5fa",
+};
+
+export type DashboardTheme = typeof lightTheme;
